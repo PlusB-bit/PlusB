@@ -1,0 +1,2152 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlusB - متجر المنتجات الرقمية والمتابعين</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6a5af9;
+            --secondary-color: #d66efd;
+            --accent-color: #6a5af9;
+            --dark-color: #2c2c54;
+            --light-color: #f5f6fa;
+            --success-color: #2ed573;
+            --warning-color: #ff9f43;
+            --text-color: #2f3542;
+            --light-text: #a4b0be;
+            --instagram-color: #E1306C;
+            --tiktok-color: #000000;
+            --twitter-color: #1DA1F2;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* التصميم العام */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+
+        .logo i {
+            margin-left: 10px;
+            background: white;
+            color: var(--primary-color);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-right: 25px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        nav ul li a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-actions button {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            margin-left: 15px;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+
+        .header-actions button:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* قسم الهيرو */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #6a5af9, #d66efd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            color: var(--light-color);
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 12px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(106, 90, 249, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(106, 90, 249, 0.6);
+        }
+
+        /* أقسام المحتوى */
+        .section {
+            padding: 80px 0;
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 36px;
+            color: var(--dark-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            margin: 15px auto;
+            border-radius: 3px;
+        }
+
+        /* قسم المنتجات */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--accent-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .product-image {
+            height: 200px;
+            overflow: hidden;
+            background: #f1f2f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-image i {
+            font-size: 80px;
+            color: var(--primary-color);
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+            font-weight: 700;
+            color: var(--dark-color);
+        }
+
+        .product-desc {
+            color: var(--light-text);
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: var(--light-text);
+            margin-left: 10px;
+            font-size: 16px;
+        }
+
+        .new-price {
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 22px;
+        }
+
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .add-to-cart {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+            flex-grow: 1;
+            margin-left: 10px;
+        }
+
+        .add-to-cart:hover {
+            background: var(--secondary-color);
+        }
+
+        .wishlist {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f1f2f6;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .wishlist:hover, .wishlist.active {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        /* قسم المتابعين */
+        .followers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .follower-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .follower-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .follower-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--accent-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .follower-image {
+            height: 180px;
+            overflow: hidden;
+            background: #f1f2f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .follower-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .follower-card:hover .follower-image img {
+            transform: scale(1.05);
+        }
+
+        .follower-info {
+            padding: 20px;
+        }
+
+        .follower-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+            font-weight: 700;
+            color: var(--dark-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .follower-title i {
+            margin-left: 10px;
+            font-size: 24px;
+        }
+
+        .instagram-title i {
+            color: var(--instagram-color);
+        }
+
+        .tiktok-title i {
+            color: var(--tiktok-color);
+        }
+
+        .twitter-title i {
+            color: var(--twitter-color);
+        }
+
+        .follower-desc {
+            color: var(--light-text);
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+
+        .follower-options {
+            margin-bottom: 20px;
+        }
+
+        .follower-option {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .follower-option:last-child {
+            border-bottom: none;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .quantity-selector label {
+            margin-left: 10px;
+            font-weight: 600;
+        }
+
+        .quantity-selector select {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: white;
+            font-size: 16px;
+        }
+
+        .calculated-price {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin: 10px 0;
+            text-align: center;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .follower-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* قسم العروض */
+        .offers {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            padding: 60px 0;
+            text-align: center;
+            color: white;
+        }
+
+        .offer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .offer-title {
+            font-size: 36px;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .offer-timer {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .timer-item {
+            background: white;
+            color: var(--dark-color);
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .timer-value {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .timer-label {
+            font-size: 14px;
+            color: var(--light-text);
+        }
+
+        /* صفحة الاتصال */
+        .contact {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .contact-info {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 40px;
+            border-radius: 15px;
+            color: white;
+        }
+
+        .contact-info h3 {
+            font-size: 24px;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .contact-info h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 3px;
+            background: white;
+        }
+
+        .contact-details {
+            list-style: none;
+        }
+
+        .contact-details li {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-details li i {
+            font-size: 20px;
+            margin-left: 15px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .contact-details li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* نماذج الإدخال */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(106, 90, 249, 0.2);
+        }
+
+        /* عربة التسوق */
+        .cart-modal, .login-modal, .payment-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .cart-content, .login-content, .payment-content {
+            background: white;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+            animation: modalAppear 0.5s ease;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .payment-content {
+            max-width: 600px;
+        }
+
+        @keyframes modalAppear {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cart-header, .login-header, .payment-header {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-items, .login-body, .payment-body {
+            padding: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            background: #f1f2f6;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 15px;
+        }
+
+        .cart-item-image img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .cart-item-info {
+            flex-grow: 1;
+        }
+
+        .cart-item-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            background: #f1f2f6;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quantity-value {
+            margin: 0 10px;
+            font-weight: 600;
+        }
+
+        .cart-item-remove {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cart-summary, .payment-summary {
+            padding: 20px;
+            background: #f8f9fa;
+            border-top: 1px solid #eee;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .checkout-btn {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .checkout-btn:hover {
+            opacity: 0.9;
+        }
+
+        .close-cart, .close-login, .close-payment {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* قسم المفضلة */
+        .favorites-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .empty-favorites {
+            text-align: center;
+            padding: 40px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .empty-favorites i {
+            font-size: 60px;
+            color: var(--light-text);
+            margin-bottom: 20px;
+        }
+
+        .empty-favorites p {
+            font-size: 18px;
+            color: var(--light-text);
+            margin-bottom: 20px;
+        }
+
+        /* طرق الدفع */
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .payment-method {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .payment-method:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(106, 90, 249, 0.2);
+        }
+
+        .payment-method i {
+            font-size: 30px;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .payment-method.selected {
+            border-color: var(--primary-color);
+            background: rgba(106, 90, 249, 0.1);
+        }
+
+        /* التذييل */
+        footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 70px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--primary-color);
+        }
+
+        .footer-column p {
+            color: #dfe4ea;
+            margin-bottom: 20px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column ul li a {
+            color: #dfe4ea;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #a4b0be;
+        }
+
+        /* التجاوب مع الشاشات المختلفة */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                margin-top: 15px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            nav ul li {
+                margin: 5px 10px;
+            }
+
+            .header-actions {
+                margin-top: 15px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .product-grid, .followers-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .auth-content {
+                width: 90%;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .offer-timer {
+                flex-wrap: wrap;
+            }
+        }
+
+        /* إضافة تأثيرات للتمرير السلس */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* تحسينات إضافية */
+        .scroll-top {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+            z-index: 99;
+        }
+
+        .scroll-top:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+    <!-- الرأس -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-plus"></i>
+                    PlusB
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#" class="nav-link" data-section="home">الرئيسية</a></li>
+                        <li><a href="#" class="nav-link" data-section="products">المنتجات</a></li>
+                        <li><a href="#" class="nav-link" data-section="followers">المتابعين</a></li>
+                        <li><a href="#" class="nav-link" data-section="offers">العروض</a></li>
+                        <li><a href="#" class="nav-link" data-section="favorites">المفضلة</a></li>
+                        <li><a href="#" class="nav-link" data-section="contact">اتصل بنا</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <button id="login-btn"><i class="fas fa-user"></i> تسجيل الدخول</button>
+                    <button id="cart-btn"><i class="fas fa-shopping-cart"></i> السلة <span class="cart-count">0</span></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- قسم الهيرو -->
+    <section class="hero" id="home-section">
+        <div class="hero-content">
+            <h1>PlusB متجرك للمنتجات الرقمية والمتابعين</h1>
+            <p>اكتشف مجموعة واسعة من المنتجات الرقمية ومتابعين حقيقيين بأسعار منافسة</p>
+            <div>
+                <a href="#" class="btn nav-link" data-section="products">استعرض المنتجات</a>
+                <a href="#" class="btn nav-link" data-section="followers" style="background: linear-gradient(to right, var(--instagram-color), var(--twitter-color)); margin-right: 15px;">متابعين حقيقيين</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم المنتجات -->
+    <section class="section products" id="products-section">
+        <div class="container">
+            <h2 class="section-title">منتجاتنا الرقمية</h2>
+            <div class="product-grid">
+                <!-- المنتج 1 -->
+                <div class="product-card">
+                    <div class="product-badge">عرض خاص</div>
+                    <div class="product-image">
+                        <img src="c:\Users\DELL\OneDrive\Desktop\5945211581187083341.jpg" alt="Netflix">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">حساب نتفليكس</h3>
+                        <p class="product-desc">اشتراك لمدة شهرين بجودة 4K مع مشاهدة على 4 أجهزة في نفس الوقت</p>
+                        <div class="product-price">
+                            <span class="new-price">12.5 ر.س</span>
+                            <span class="old-price">50 ر.س</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="add-to-cart">أضف إلى السلة</button>
+                            <button class="wishlist"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- المنتج 2 -->
+                <div class="product-card">
+                    <div class="product-badge">الأكثر مبيعاً</div>
+                    <div class="product-image">
+                        <img src="c:\Users\DELL\OneDrive\Desktop\disney.jpeg" alt="Disney Plus">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">حساب ديزني بلس</h3>
+                        <p class="product-desc">اشتراك سنوي مع دعم 4 أجهزة ومشاهدة غير محدودة للمحتوى الحصري</p>
+                        <div class="product-price">
+                            <span class="new-price">15 ر.س</span>
+                            <span class="old-price">30 ر.س</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="add-to-cart">أضف إلى السلة</button>
+                            <button class="wishlist"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- المنتج 3 - FC 26 مع اختيار الكمية -->
+                <div class="product-card">
+                    <div class="product-badge">جديد</div>
+                    <div class="product-image">
+                        <img src="https://tse3.mm.bing.net/th/id/OIP.l-DW5Pwa-rUIjakYrvB_NAHaEK?rs=1&pid=ImgDetMain&o=7&rm=3" alt="FC 26">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">كوينز FC 26</h3>
+                        <p class="product-desc">عملات FC 26 مع ضمان عدم الحظر وتوصيل فوري</p>
+                        
+                        <div class="quantity-selector">
+                            <label for="fc26-quantity">اختر الكمية:</label>
+                            <select id="fc26-quantity">
+                                <option value="100000">100,000 عملة - 5 ر.س</option>
+                                <option value="250000">250,000 عملة - 10 ر.س</option>
+                                <option value="500000">500,000 عملة - 18 ر.س</option>
+                                <option value="1000000" selected>1,000,000 عملة - 35 ر.س</option>
+                                <option value="2000000">2,000,000 عملة - 65 ر.س</option>
+                            </select>
+                        </div>
+                        
+                        <div class="calculated-price" id="fc26-calculated-price">
+                            35 ر.س
+                        </div>
+                        
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-product-type="fc26">أضف إلى السلة</button>
+                            <button class="wishlist"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- المنتج 4 -->
+                <div class="product-card">
+                    <div class="product-badge">عرض محدود</div>
+                    <div class="product-image">
+                        <img src="https://th.bing.com/th/id/OIP.vwQXHnG-PWY_O1WBEvVI3QHaEK?w=289&h=180&c=7&r=0&o=5&pid=1.7" alt="Call of Duty">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">كول أوف ديوتي</h3>
+                        <p class="product-desc">نسخة كاملة مع جميع الحزم والإضافات للبلايستيشن والإكس بوكس</p>
+                        <div class="product-price">
+                            <span class="new-price">149 ر.س</span>
+                            <span class="old-price">299 ر.س</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="add-to-cart">أضف إلى السلة</button>
+                            <button class="wishlist"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- المنتج 5 -->
+                <div class="product-card">
+                    <div class="product-badge">عرض خاص</div>
+                    <div class="product-image">
+                        <img src="https://th.bing.com/th/id/OIP.QXcMbv9lHUL_Fz8xwwraEgHaEI?w=287&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt="Rocket League">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">روكت ليج</h3>
+                        <p class="product-desc">10,000 كريدت مع جميع السيارات النادرة والإضافات الحصرية</p>
+                        <div class="product-price">
+                            <span class="new-price">79 ر.س</span>
+                            <span class="old-price">159 ر.س</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="add-to-cart">أضف إلى السلة</button>
+                            <button class="wishlist"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- المنتج 6 -->
+                <div class="product-card">
+                    <div class="product-badge">عرض حصري</div>
+                    <div class="product-image">
+                        <img src="https://th.bing.com/th/id/OIP.qx5kXr9cGH3KpO7HfW-W8gHaEK?w=322&h=181&c=7&r=0&o=7&pid=1.7&rm=3" alt="Fortnite">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">فورتنايت</h3>
+                        <p class="product-desc">13,500 V-Bucks مع جميع الإضافات والمحتوى الحصري للموسم الجديد</p>
+                        <div class="product-price">
+                            <span class="new-price">89 ر.س</span>
+                            <span class="old-price">179 ر.س</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="add-to-cart">أضف إلى السلة</button>
+                            <button class="wishlist"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- المنتج 7 -->
+                <div class="product-card">
+                    <div class="product-badge">جديد</div>
+                    <div class="product-image">
+                        <img src="https://th.bing.com/th/id/OIP.cmXa4K0aMyQU2TNEe6DQLQHaEK?w=291&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt="GTA 6">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">GTA 6</h3>
+                        <p class="product-desc">نسخة كاملة من اللعبة الأكثر انتظاراً مع جميع المزايا الحصرية</p>
+                        <div class="product-price">
+                            <span class="new-price">199 ر.س</span>
+                            <span class="old-price">399 ر.س</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="add-to-cart">أضف إلى السلة</button>
+                            <button class="wishlist"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- المنتج 8 -->
+                <div class="product-card">
+                    <div class="product-badge">عرض خاص</div>
+                    <div class="product-image">
+                        <img src="data:image/webp;base64,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" alt="Minecraft">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">ماينكرافت</h3>
+                        <p class="product-desc">نسخة كاملة مع جميع الإضافات والحزم الحصرية للعبة</p>
+                        <div class="product-price">
+                            <span class="new-price">69 ر.س</span>
+                            <span class="old-price">139 ر.س</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="add-to-cart">أضف إلى السلة</button>
+                            <button class="wishlist"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم المتابعين -->
+    <section class="section followers" id="followers-section">
+        <div class="container">
+            <h2 class="section-title">خدمات المتابعين</h2>
+            <div class="followers-grid">
+                <!-- متابعين إنستجرام -->
+                <div class="follower-card">
+                    <div class="follower-badge">الأكثر طلباً</div>
+                    <div class="follower-image">
+                        <img src="https://th.bing.com/th/id/OIP.QS-PEnuYwhr7NJ5Dl0b7xAHaFj?w=212&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt="Instagram Followers">
+                    </div>
+                    <div class="follower-info">
+                        <h3 class="follower-title instagram-title"><i class="fab fa-instagram"></i> متابعين إنستجرام</h3>
+                        <p class="follower-desc">متابعين حقيقيين ونشطين مع ضمان الجودة والاستمرارية</p>
+                        
+                        <div class="quantity-selector">
+                            <label for="instagram-quantity">اختر الكمية:</label>
+                            <select id="instagram-quantity">
+                                <option value="100">100 متابع - 5 ر.س</option>
+                                <option value="500">500 متابع - 20 ر.س</option>
+                                <option value="1000" selected>1000 متابع - 35 ر.س</option>
+                                <option value="5000">5000 متابع - 150 ر.س</option>
+                            </select>
+                        </div>
+                        
+                        <div class="calculated-price" id="instagram-calculated-price">
+                            35 ر.س
+                        </div>
+                        
+                        <div class="follower-actions">
+                            <button class="add-to-cart" data-product-type="instagram">أضف إلى السلة</button>
+                            <button class="wishlist"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- متابعين تيك توك -->
+                <div class="follower-card">
+                    <div class="follower-badge">جديد</div>
+                    <div class="follower-image">
+                        <img src="data:image/webp;base64,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" alt="TikTok Followers">
+                    </div>
+                    <div class="follower-info">
+                        <h3 class="follower-title tiktok-title"><i class="fab fa-tiktok"></i> متابعين تيك توك</h3>
+                        <p class="follower-desc">متابعين حقيقيين ونشطين مع ضمان الجودة والاستمرارية</p>
+                        
+                        <div class="quantity-selector">
+                            <label for="tiktok-quantity">اختر الكمية:</label>
+                            <select id="tiktok-quantity">
+                                <option value="100">100 متابع - 7 ر.س</option>
+                                <option value="500">500 متابع - 30 ر.س</option>
+                                <option value="1000" selected>1000 متابع - 50 ر.س</option>
+                                <option value="5000">5000 متابع - 200 ر.س</option>
+                            </select>
+                        </div>
+                        
+                        <div class="calculated-price" id="tiktok-calculated-price">
+                            50 ر.س
+                        </div>
+                        
+                        <div class="follower-actions">
+                            <button class="add-to-cart" data-product-type="tiktok">أضف إلى السلة</button>
+                            <button class="wishlist"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- متابعين تويتر -->
+                <div class="follower-card">
+                    <div class="follower-badge">مميز</div>
+                    <div class="follower-image">
+                        <img src="https://images.unsplash.com/photo-1611605698335-8b1569810432?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Twitter Followers">
+                    </div>
+                    <div class="follower-info">
+                        <h3 class="follower-title twitter-title"><i class="fab fa-twitter"></i> متابعين تويتر</h3>
+                        <p class="follower-desc">متابعين حقيقيين ونشطين مع ضمان الجودة والاستمرارية</p>
+                        
+                        <div class="quantity-selector">
+                            <label for="twitter-quantity">اختر الكمية:</label>
+                            <select id="twitter-quantity">
+                                <option value="100">100 متابع - 6 ر.س</option>
+                                <option value="500">500 متابع - 25 ر.س</option>
+                                <option value="1000" selected>1000 متابع - 45 ر.س</option>
+                                <option value="5000">5000 متابع - 180 ر.س</option>
+                            </select>
+                        </div>
+                        
+                        <div class="calculated-price" id="twitter-calculated-price">
+                            45 ر.س
+                        </div>
+                        
+                        <div class="follower-actions">
+                            <button class="add-to-cart" data-product-type="twitter">أضف إلى السلة</button>
+                            <button class="wishlist"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم العروض -->
+    <section class="offers" id="offers-section">
+        <div class="container">
+            <div class="offer-content">
+                <h2 class="offer-title">عروض اليوم الوطني</h2>
+                <p>خصومات تصل إلى 50% على جميع المنتجات والمتابعين بمناسبة اليوم الوطني - العرض ساري حتى 25 سبتمبر 2025</p>
+                
+                <div class="offer-timer">
+                    <div class="timer-item">
+                        <div class="timer-value" id="days">00</div>
+                        <div class="timer-label">أيام</div>
+                    </div>
+                    <div class="timer-item">
+                        <div class="timer-value" id="hours">00</div>
+                        <div class="timer-label">ساعات</div>
+                    </div>
+                    <div class="timer-item">
+                        <div class="timer-value" id="minutes">00</div>
+                        <div class="timer-label">دقائق</div>
+                    </div>
+                    <div class="timer-item">
+                        <div class="timer-value" id="seconds">00</div>
+                        <div class="timer-label">ثواني</div>
+                    </div>
+                </div>
+                
+                <a href="#" class="btn nav-link" data-section="products">استفد من العروض الآن</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم المفضلة -->
+    <section class="section favorites-section" id="favorites-section">
+        <div class="container">
+            <h2 class="section-title">منتجاتي المفضلة</h2>
+            <div class="product-grid" id="favorites-grid">
+                <!-- سيتم إضافة المنتجات المفضلة هنا عبر JavaScript -->
+            </div>
+            <div class="empty-favorites" id="empty-favorites">
+                <i class="far fa-heart"></i>
+                <p>لا توجد منتجات في المفضلة بعد</p>
+                <a href="#" class="btn nav-link" data-section="products">استعرض المنتجات</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- صفحة الاتصال -->
+    <section class="section contact" id="contact-section">
+        <div class="container">
+            <h2 class="section-title">اتصل بنا</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>معلومات التواصل</h3>
+                    <ul class="contact-details">
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>0552511301</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>info@plusb.com</span>
+                        </li>
+                        <li>
+                            <i class="fab fa-whatsapp"></i>
+                            <a href="https://wa.me/966552511301" target="_blank">تواصل عبر واتساب</a>
+                        </li>
+                        <li>
+                            <i class="fab fa-instagram"></i>
+                            <a href="https://instagram.com/s.plusb" target="_blank">s.plusb</a>
+                        </li>
+                        <li>
+                            <i class="fab fa-snapchat"></i>
+                            <a href="https://snapchat.com/add/s.plusb" target="_blank">s.plusb</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>بريدة - المطا، المملكة العربية السعودية</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <span>24/7 خدمة العملاء</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="contact-form">
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <label for="name">الاسم الكامل</label>
+                            <input type="text" id="name" placeholder="أدخل اسمك الكامل" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">البريد الإلكتروني</label>
+                            <input type="email" id="email" placeholder="أدخل بريدك الإلكتروني" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">الرسالة</label>
+                            <textarea id="message" rows="5" placeholder="اكتب رسالتك هنا..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn">إرسال الرسالة</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- عربة التسوق -->
+    <div class="cart-modal" id="cart-modal">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h2>عربة التسوق</h2>
+                <button class="close-cart" id="close-cart">&times;</button>
+            </div>
+            <div class="cart-items" id="cart-items">
+                <!-- سيتم إضافة العناصر هنا عبر JavaScript -->
+            </div>
+            <div class="cart-summary">
+                <div class="cart-total">
+                    <span>المجموع:</span>
+                    <span id="cart-total-price">0 ر.س</span>
+                </div>
+                <button class="checkout-btn" id="checkout-btn">إتمام الشراء</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- تسجيل الدخول -->
+    <div class="login-modal" id="login-modal">
+        <div class="login-content">
+            <div class="login-header">
+                <h2>تسجيل الدخول</h2>
+                <button class="close-login" id="close-login">&times;</button>
+            </div>
+            <div class="login-body">
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="login-email">البريد الإلكتروني</label>
+                        <input type="email" id="login-email" placeholder="أدخل بريدك الإلكتروني" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">كلمة المرور</label>
+                        <input type="password" id="login-password" placeholder="أدخل كلمة المرور" required>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%">تسجيل الدخول</button>
+                </form>
+                <p style="text-align: center; margin-top: 20px;">
+                    ليس لديك حساب؟ <a href="#" style="color: var(--primary-color);">إنشاء حساب جديد</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- صفحة الدفع -->
+    <div class="payment-modal" id="payment-modal">
+        <div class="payment-content">
+            <div class="payment-header">
+                <h2>إتمام عملية الشراء</h2>
+                <button class="close-payment" id="close-payment">&times;</button>
+            </div>
+            <div class="payment-body">
+                <h3 style="margin-bottom: 20px;">اختر طريقة الدفع</h3>
+                <div class="payment-methods">
+                    <div class="payment-method">
+                        <i class="fab fa-cc-visa"></i>
+                        <span>بطاقة ائتمان</span>
+                    </div>
+                    <div class="payment-method">
+                        <i class="fab fa-cc-mastercard"></i>
+                        <span>بطاقة مدى</span>
+                    </div>
+                    <div class="payment-method">
+                        <i class="fab fa-cc-apple-pay"></i>
+                        <span>Apple Pay</span>
+                    </div>
+                    <div class="payment-method">
+                        <i class="fab fa-cc-paypal"></i>
+                        <span>PayPal</span>
+                    </div>
+                </div>
+                
+                <div class="form-group" style="margin-top: 30px;">
+                    <label for="card-number">رقم البطاقة</label>
+                    <input type="text" id="card-number" placeholder="أدخل رقم البطاقة" required>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="form-group">
+                        <label for="expiry-date">تاريخ الانتهاء</label>
+                        <input type="text" id="expiry-date" placeholder="MM/YY" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cvv">CVV</label>
+                        <input type="text" id="cvv" placeholder="CVV" required>
+                    </div>
+                </div>
+            </div>
+            <div class="payment-summary">
+                <div class="cart-total">
+                    <span>المجموع:</span>
+                    <span id="payment-total-price">0 ر.س</span>
+                </div>
+                <button class="checkout-btn">دفع الآن</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- زر العودة للأعلى -->
+    <a href="#" class="scroll-top" id="scroll-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- التذييل -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>عن PlusB</h3>
+                    <p>متجرنا متخصص في تقديم أفضل المنتجات الرقمية وخدمات المتابعين بجودة عالية وأسعار مناسبة لتلبية احتياجاتك.</p>
+                    <div class="social-icons">
+                        <a href="https://instagram.com/s.plusb" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://snapchat.com/add/s.plusb" target="_blank"><i class="fab fa-snapchat"></i></a>
+                        <a href="https://twitter.com/plusb" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://wa.me/966552511301" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="#" class="nav-link" data-section="home">الرئيسية</a></li>
+                        <li><a href="#" class="nav-link" data-section="products">المنتجات</a></li>
+                        <li><a href="#" class="nav-link" data-section="followers">المتابعين</a></li>
+                        <li><a href="#" class="nav-link" data-section="favorites">المفضلة</a></li>
+                        <li><a href="#" class="nav-link" data-section="contact">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>الدعم</h3>
+                    <ul>
+                        <li><a href="#">الأسئلة الشائعة</a></li>
+                        <li><a href="#">سياسة الخصوصية</a></li>
+                        <li><a href="#">شروط الخدمة</a></li>
+                        <li><a href="#">طرق الدفع</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>وسائل الدفع</h3>
+                    <ul>
+                        <li>بطاقات الائتمان</li>
+                        <li>حسابات بنكية</li>
+                        <li>الدفع عند الاستلام</li>
+                        <li>المحافظ الإلكترونية</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 PlusB. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // إدارة التنقل بين الصفحات
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const homeSection = document.getElementById('home-section');
+            
+            // إظهار الصفحة الرئيسية أولاً
+            homeSection.classList.add('active');
+            
+            // إضافة أحداث التنقل
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetSection = this.getAttribute('data-section');
+                    
+                    // إخفاء جميع الأقسام
+                    sections.forEach(section => {
+                        section.classList.remove('active');
+                    });
+                    
+                    // إظهار القسم المطلوب
+                    document.getElementById(`${targetSection}-section`).classList.add('active');
+                    
+                    // التمرير إلى الأعلى
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+            
+            // إدارة عربة التسوق
+            const cartBtn = document.getElementById('cart-btn');
+            const cartModal = document.getElementById('cart-modal');
+            const closeCart = document.getElementById('close-cart');
+            const cartItems = document.getElementById('cart-items');
+            const cartCount = document.querySelector('.cart-count');
+            const cartTotal = document.getElementById('cart-total-price');
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            const wishlistButtons = document.querySelectorAll('.wishlist');
+            const checkoutBtn = document.getElementById('checkout-btn');
+            const contactForm = document.getElementById('contact-form');
+            const scrollTopBtn = document.getElementById('scroll-top');
+            const loginBtn = document.getElementById('login-btn');
+            const loginModal = document.getElementById('login-modal');
+            const closeLogin = document.getElementById('close-login');
+            const paymentModal = document.getElementById('payment-modal');
+            const closePayment = document.getElementById('close-payment');
+            const paymentTotal = document.getElementById('payment-total-price');
+            const loginForm = document.getElementById('login-form');
+            const favoritesGrid = document.getElementById('favorites-grid');
+            const emptyFavorites = document.getElementById('empty-favorites');
+            
+            let cart = [];
+            let count = 0;
+            let favorites = [];
+
+            // أسعار المنتجات
+            const productPrices = {
+                'instagram': {
+                    '100': 5,
+                    '500': 20,
+                    '1000': 35,
+                    '5000': 150
+                },
+                'tiktok': {
+                    '100': 7,
+                    '500': 30,
+                    '1000': 50,
+                    '5000': 200
+                },
+                'twitter': {
+                    '100': 6,
+                    '500': 25,
+                    '1000': 45,
+                    '5000': 180
+                },
+                'fc26': {
+                    '100000': 5,
+                    '250000': 10,
+                    '500000': 18,
+                    '1000000': 35,
+                    '2000000': 65
+                }
+            };
+
+            // تحديث الأسعار المعروضة
+            function updateCalculatedPrices() {
+                // إنستجرام
+                const instagramSelect = document.getElementById('instagram-quantity');
+                const instagramPrice = document.getElementById('instagram-calculated-price');
+                const selectedInstagramValue = instagramSelect.value;
+                instagramPrice.textContent = `${productPrices.instagram[selectedInstagramValue]} ر.س`;
+                instagramPrice.style.display = 'block';
+                
+                // تيك توك
+                const tiktokSelect = document.getElementById('tiktok-quantity');
+                const tiktokPrice = document.getElementById('tiktok-calculated-price');
+                const selectedTiktokValue = tiktokSelect.value;
+                tiktokPrice.textContent = `${productPrices.tiktok[selectedTiktokValue]} ر.س`;
+                tiktokPrice.style.display = 'block';
+                
+                // تويتر
+                const twitterSelect = document.getElementById('twitter-quantity');
+                const twitterPrice = document.getElementById('twitter-calculated-price');
+                const selectedTwitterValue = twitterSelect.value;
+                twitterPrice.textContent = `${productPrices.twitter[selectedTwitterValue]} ر.س`;
+                twitterPrice.style.display = 'block';
+                
+                // FC26
+                const fc26Select = document.getElementById('fc26-quantity');
+                const fc26Price = document.getElementById('fc26-calculated-price');
+                const selectedFc26Value = fc26Select.value;
+                fc26Price.textContent = `${productPrices.fc26[selectedFc26Value]} ر.س`;
+                fc26Price.style.display = 'block';
+            }
+            
+            // تحديث الأسعار عند تغيير الكمية
+            document.getElementById('instagram-quantity').addEventListener('change', updateCalculatedPrices);
+            document.getElementById('tiktok-quantity').addEventListener('change', updateCalculatedPrices);
+            document.getElementById('twitter-quantity').addEventListener('change', updateCalculatedPrices);
+            document.getElementById('fc26-quantity').addEventListener('change', updateCalculatedPrices);
+            
+            // تهيئة الأسعار عند التحميل
+            updateCalculatedPrices();
+
+            // فتح وإغلاق عربة التسوق
+            cartBtn.addEventListener('click', function() {
+                updateCartDisplay();
+                cartModal.style.display = 'flex';
+            });
+
+            closeCart.addEventListener('click', function() {
+                cartModal.style.display = 'none';
+            });
+
+            // فتح وإغلاق تسجيل الدخول
+            loginBtn.addEventListener('click', function() {
+                loginModal.style.display = 'flex';
+            });
+
+            closeLogin.addEventListener('click', function() {
+                loginModal.style.display = 'none';
+            });
+
+            // فتح وإغلاق صفحة الدفع
+            checkoutBtn.addEventListener('click', function() {
+                if (cart.length === 0) {
+                    alert('عربة التسوق فارغة. أضف بعض المنتجات أولاً.');
+                    return;
+                }
+                
+                paymentTotal.textContent = cartTotal.textContent;
+                paymentModal.style.display = 'flex';
+                cartModal.style.display = 'none';
+            });
+
+            closePayment.addEventListener('click', function() {
+                paymentModal.style.display = 'none';
+            });
+
+            window.addEventListener('click', function(event) {
+                if (event.target === cartModal) {
+                    cartModal.style.display = 'none';
+                }
+                if (event.target === loginModal) {
+                    loginModal.style.display = 'none';
+                }
+                if (event.target === paymentModal) {
+                    paymentModal.style.display = 'none';
+                }
+            });
+
+            // إضافة منتج إلى السلة
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    let title, price, image, quantityText;
+                    
+                    if (this.dataset.productType) {
+                        // منتج بكمية محددة (متابعين أو عملات)
+                        const productType = this.dataset.productType;
+                        const selectElement = document.getElementById(`${productType}-quantity`);
+                        const selectedValue = selectElement.value;
+                        
+                        if (productType === 'fc26') {
+                            title = `كوينز FC 26 (${formatNumber(selectedValue)} عملة)`;
+                            price = productPrices.fc26[selectedValue];
+                        } else {
+                            title = `متابعين ${getPlatformName(productType)} (${formatNumber(selectedValue)} متابع)`;
+                            price = productPrices[productType][selectedValue];
+                        }
+                        
+                        image = this.closest('.product-card, .follower-card').querySelector('img').src;
+                        quantityText = selectedValue;
+                    } else {
+                        // منتج عادي
+                        const productCard = this.closest('.product-card');
+                        title = productCard.querySelector('.product-title').textContent;
+                        price = parseFloat(productCard.querySelector('.new-price').textContent);
+                        image = productCard.querySelector('img').src;
+                        quantityText = "1";
+                    }
+                    
+                    // التحقق إذا كان المنتج موجوداً بالفعل في السلة
+                    const existingItem = cart.find(item => item.title === title);
+                    
+                    if (existingItem) {
+                        existingItem.quantity++;
+                    } else {
+                        cart.push({
+                            title: title,
+                            price: price,
+                            image: image,
+                            quantity: 1,
+                            quantityText: quantityText
+                        });
+                    }
+                    
+                    count++;
+                    cartCount.textContent = count;
+                    
+                    // تأثير عند الإضافة
+                    this.innerHTML = 'تمت الإضافة <i class="fas fa-check"></i>';
+                    this.style.background = 'var(--success-color)';
+                    
+                    setTimeout(() => {
+                        this.innerHTML = 'أضف إلى السلة';
+                        this.style.background = '';
+                    }, 2000);
+                });
+            });
+
+            // دالة للحصول على اسم المنصة
+            function getPlatformName(type) {
+                const platforms = {
+                    'instagram': 'إنستجرام',
+                    'tiktok': 'تيك توك',
+                    'twitter': 'تويتر'
+                };
+                return platforms[type] || '';
+            }
+
+            // دالة لتنسيق الأرقام
+            function formatNumber(num) {
+                return new Intl.NumberFormat().format(num);
+            }
+
+            // تحديث عرض عربة التسوق
+            function updateCartDisplay() {
+                cartItems.innerHTML = '';
+                let total = 0;
+                
+                if (cart.length === 0) {
+                    cartItems.innerHTML = '<p style="text-align: center; padding: 20px;">عربة التسوق فارغة</p>';
+                } else {
+                    cart.forEach((item, index) => {
+                        const itemTotal = item.price * item.quantity;
+                        total += itemTotal;
+                        
+                        const cartItemElement = document.createElement('div');
+                        cartItemElement.classList.add('cart-item');
+                        cartItemElement.innerHTML = `
+                            <div class="cart-item-image">
+                                <img src="${item.image}" alt="${item.title}">
+                            </div>
+                            <div class="cart-item-info">
+                                <h3 class="cart-item-title">${item.title}</h3>
+                                <p class="cart-item-price">${item.price} ر.س</p>
+                                <div class="cart-item-quantity">
+                                    <button class="quantity-btn decrease" data-index="${index}">-</button>
+                                    <span class="quantity-value">${item.quantity}</span>
+                                    <button class="quantity-btn increase" data-index="${index}">+</button>
+                                </div>
+                            </div>
+                            <button class="cart-item-remove" data-index="${index}">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        `;
+                        
+                        cartItems.appendChild(cartItemElement);
+                    });
+                    
+                    // إضافة أحداث للكمية والإزالة
+                    document.querySelectorAll('.quantity-btn.decrease').forEach(btn => {
+                        btn.addEventListener('click', function() {
+                            const index = parseInt(this.getAttribute('data-index'));
+                            if (cart[index].quantity > 1) {
+                                cart[index].quantity--;
+                                count--;
+                                cartCount.textContent = count;
+                                updateCartDisplay();
+                            }
+                        });
+                    });
+                    
+                    document.querySelectorAll('.quantity-btn.increase').forEach(btn => {
+                        btn.addEventListener('click', function() {
+                            const index = parseInt(this.getAttribute('data-index'));
+                            cart[index].quantity++;
+                            count++;
+                            cartCount.textContent = count;
+                            updateCartDisplay();
+                        });
+                    });
+                    
+                    document.querySelectorAll('.cart-item-remove').forEach(btn => {
+                        btn.addEventListener('click', function() {
+                            const index = parseInt(this.getAttribute('data-index'));
+                            count -= cart[index].quantity;
+                            cartCount.textContent = count;
+                            cart.splice(index, 1);
+                            updateCartDisplay();
+                        });
+                    });
+                }
+                
+                cartTotal.textContent = `${total.toFixed(2)} ر.س`;
+            }
+
+            // إضافة إلى المفضلة
+            wishlistButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    const icon = this.querySelector('i');
+                    const productCard = this.closest('.product-card, .follower-card');
+                    const title = productCard.querySelector('.product-title, .follower-title').textContent;
+                    const image = productCard.querySelector('img').src;
+                    let price, description;
+                    
+                    if (productCard.querySelector('.new-price')) {
+                        price = productCard.querySelector('.new-price').textContent;
+                    } else {
+                        // لمنتجات المتابعين التي تحتوي على سعر محسوب
+                        const productType = this.closest('.follower-card') ? 
+                            productCard.querySelector('.follower-title').classList[1].replace('-title', '') : 
+                            'product';
+                        
+                        if (productType !== 'product') {
+                            const calculatedPrice = document.getElementById(`${productType}-calculated-price`);
+                            price = calculatedPrice.textContent;
+                        }
+                    }
+                    
+                    description = productCard.querySelector('.product-desc, .follower-desc').textContent;
+                    
+                    if (this.classList.contains('active')) {
+                        icon.classList.remove('far');
+                        icon.classList.add('fas');
+                        this.style.background = '#ff6b6b';
+                        this.style.color = 'white';
+                        
+                        // إضافة المنتج إلى المفضلة
+                        if (!favorites.find(item => item.title === title)) {
+                            favorites.push({
+                                title: title,
+                                price: price,
+                                image: image,
+                                description: description
+                            });
+                        }
+                    } else {
+                        icon.classList.remove('fas');
+                        icon.classList.add('far');
+                        this.style.background = '';
+                        this.style.color = '';
+                        
+                        // إزالة المنتج من المفضلة
+                        const index = favorites.findIndex(item => item.title === title);
+                        if (index > -1) {
+                            favorites.splice(index, 1);
+                        }
+                    }
+                    
+                    // تحديث عرض المفضلة
+                    updateFavoritesDisplay();
+                });
+            });
+
+            // تحديث عرض المفضلة
+            function updateFavoritesDisplay() {
+                favoritesGrid.innerHTML = '';
+                
+                if (favorites.length > 0) {
+                    emptyFavorites.style.display = 'none';
+                    
+                    favorites.forEach(item => {
+                        const favoriteElement = document.createElement('div');
+                        favoriteElement.classList.add('product-card');
+                        favoriteElement.innerHTML = `
+                            <div class="product-image">
+                                <img src="${item.image}" alt="${item.title}">
+                            </div>
+                            <div class="product-info">
+                                <h3 class="product-title">${item.title}</h3>
+                                <p class="product-desc">${item.description}</p>
+                                <div class="product-price">
+                                    <span class="new-price">${item.price}</span>
+                                </div>
+                                <div class="product-actions">
+                                    <button class="add-to-cart">أضف إلى السلة</button>
+                                    <button class="wishlist active"><i class="fas fa-heart"></i></button>
+                                </div>
+                            </div>
+                        `;
+                        
+                        favoritesGrid.appendChild(favoriteElement);
+                    });
+                    
+                    // إضافة الأحداث للعناصر الجديدة
+                    const newWishlistButtons = favoritesGrid.querySelectorAll('.wishlist');
+                    newWishlistButtons.forEach(button => {
+                        button.addEventListener('click', function() {
+                            const productCard = this.closest('.product-card');
+                            const title = productCard.querySelector('.product-title').textContent;
+                            
+                            this.classList.remove('active');
+                            const icon = this.querySelector('i');
+                            icon.classList.remove('fas');
+                            icon.classList.add('far');
+                            this.style.background = '';
+                            this.style.color = '';
+                            
+                            // إزالة المنتج من المفضلة
+                            const index = favorites.findIndex(item => item.title === title);
+                            if (index > -1) {
+                                favorites.splice(index, 1);
+                            }
+                            
+                            // تحديث عرض المفضلة
+                            updateFavoritesDisplay();
+                        });
+                    });
+                    
+                    const newAddToCartButtons = favoritesGrid.querySelectorAll('.add-to-cart');
+                    newAddToCartButtons.forEach(button => {
+                        button.addEventListener('click', function() {
+                            const productCard = this.closest('.product-card');
+                            const title = productCard.querySelector('.product-title').textContent;
+                            const price = parseFloat(productCard.querySelector('.new-price').textContent);
+                            const image = productCard.querySelector('img').src;
+                            
+                            // التحقق إذا كان المنتج موجوداً بالفعل في السلة
+                            const existingItem = cart.find(item => item.title === title);
+                            
+                            if (existingItem) {
+                                existingItem.quantity++;
+                            } else {
+                                cart.push({
+                                    title: title,
+                                    price: price,
+                                    image: image,
+                                    quantity: 1
+                                });
+                            }
+                            
+                            count++;
+                            cartCount.textContent = count;
+                            
+                            // تأثير عند الإضافة
+                            this.innerHTML = 'تمت الإضافة <i class="fas fa-check"></i>';
+                            this.style.background = 'var(--success-color)';
+                            
+                            setTimeout(() => {
+                                this.innerHTML = 'أضف إلى السلة';
+                                this.style.background = '';
+                            }, 2000);
+                        });
+                    });
+                } else {
+                    emptyFavorites.style.display = 'block';
+                }
+            }
+
+            // إتمام الشراء
+            checkoutBtn.addEventListener('click', function() {
+                if (cart.length === 0) {
+                    alert('عربة التسوق فارغة. أضف بعض المنتجات أولاً.');
+                    return;
+                }
+                
+                paymentTotal.textContent = cartTotal.textContent;
+                paymentModal.style.display = 'flex';
+                cartModal.style.display = 'none';
+            });
+
+            // إرسال نموذج الاتصال
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('شكراً لك على رسالتك! سنتواصل معك قريباً.');
+                this.reset();
+            });
+
+            // إرسال نموذج تسجيل الدخول
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('تم تسجيل الدخول بنجاح!');
+                loginModal.style.display = 'none';
+            });
+
+            // العد التنازلي للعروض
+            function updateOfferTimer() {
+                const days = document.getElementById('days');
+                const hours = document.getElementById('hours');
+                const minutes = document.getElementById('minutes');
+                const seconds = document.getElementById('seconds');
+                
+                // تعيين تاريخ انتهاء العرض (25 سبتمبر 2025)
+                const countDownDate = new Date('September 25, 2025 23:59:59').getTime();
+                
+                function updateTimer() {
+                    const now = new Date().getTime();
+                    const distance = countDownDate - now;
+                    
+                    const daysValue = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hoursValue = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutesValue = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const secondsValue = Math.floor((distance % (1000 * 60)) / 1000);
+                    
+                    days.textContent = daysValue.toString().padStart(2, '0');
+                    hours.textContent = hoursValue.toString().padStart(2, '0');
+                    minutes.textContent = minutesValue.toString().padStart(2, '0');
+                    seconds.textContent = secondsValue.toString().padStart(2, '0');
+                    
+                    if (distance < 0) {
+                        clearInterval(timerInterval);
+                        days.textContent = '00';
+                        hours.textContent = '00';
+                        minutes.textContent = '00';
+                        seconds.textContent = '00';
+                    }
+                }
+                
+                // تحديث العد التنازلي كل ثانية
+                updateTimer();
+                const timerInterval = setInterval(updateTimer, 1000);
+            }
+            
+            // بدء العد التنازلي
+            updateOfferTimer();
+            
+            // زر العودة للأعلى
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    scrollTopBtn.style.display = 'flex';
+                } else {
+                    scrollTopBtn.style.display = 'none';
+                }
+            });
+            
+            scrollTopBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // تحديد طريقة الدفع
+            document.querySelectorAll('.payment-method').forEach(method => {
+                method.addEventListener('click', function() {
+                    document.querySelectorAll('.payment-method').forEach(m => {
+                        m.classList.remove('selected');
+                    });
+                    this.classList.add('selected');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
