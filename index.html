@@ -1621,26 +1621,33 @@
                 <div class="payment-form">
                     <h3>معلومات الدفع</h3>
                     
-                    <form id="payment-form">
+                    <form id="payment-form" action="https://formspree.io/f/xanppabj" method="POST">
+                        <input type="hidden" name="_subject" value="طلب جديد - PlusB Store">
+                        <input type="hidden" name="_template" value="table">
+                        
                         <div class="form-group">
                             <label for="name">الاسم الكامل</label>
-                            <input type="text" id="name" placeholder="أدخل اسمك الكامل" required>
+                            <input type="text" id="name" name="name" placeholder="أدخل اسمك الكامل" required>
                         </div>
                         
                         <div class="form-group">
                             <label for="email">البريد الإلكتروني</label>
-                            <input type="email" id="email" placeholder="أدخل بريدك الإلكتروني" required>
+                            <input type="email" id="email" name="email" placeholder="أدخل بريدك الإلكتروني" required>
                         </div>
                         
                         <div class="form-group">
                             <label for="phone">رقم الهاتف</label>
-                            <input type="tel" id="phone" placeholder="أدخل رقم هاتفك" required>
+                            <input type="tel" id="phone" name="phone" placeholder="أدخل رقم هاتفك" required>
                         </div>
                         
                         <div class="form-group">
                             <label for="notes">ملاحظات إضافية (اختياري)</label>
-                            <textarea id="notes" rows="3" placeholder="أضف أي ملاحظات حول طلبك"></textarea>
+                            <textarea id="notes" name="notes" rows="3" placeholder="أضف أي ملاحظات حول طلبك"></textarea>
                         </div>
+                        
+                        <!-- إضافة تفاصيل الطلب كحقول مخفية -->
+                        <input type="hidden" id="order-items-data" name="order_items">
+                        <input type="hidden" id="order-total-data" name="order_total">
                         
                         <div class="payment-instructions">
                             <h4>تعليمات الدفع عبر التحويل البنكي:</h4>
@@ -1724,6 +1731,7 @@
                 <div class="contact-form">
                     <h3>أرسل رسالة</h3>
                     <form id="contact-form" action="https://formspree.io/f/xanppabj" method="POST">
+                        <input type="hidden" name="_subject" value="رسالة جديدة - PlusB Store">
                         <div class="form-group">
                             <label for="contact-name">الاسم الكامل</label>
                             <input type="text" id="contact-name" name="name" placeholder="أدخل اسمك الكامل" required>
@@ -1962,6 +1970,68 @@
                     console.error('Error:', error);
                 });
             });
+            
+            // إدارة نموذج الطلب باستخدام Formspree
+            const paymentForm = document.getElementById('payment-form');
+            const successMessage = document.getElementById('success-message');
+            
+            paymentForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // تحديث بيانات الطلب المخفية قبل الإرسال
+                updateOrderData();
+                
+                // جمع بيانات النموذج
+                const formData = new FormData(this);
+                
+                // إرسال البيانات إلى Formspree
+                fetch(this.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // إظهار رسالة النجاح
+                        successMessage.classList.add('active');
+                        
+                        // تفريغ السلة بعد إتمام الطلب
+                        cart = [];
+                        count = 0;
+                        cartCount.textContent = count;
+                        
+                        // تمرير إلى أعلى الصفحة لرؤية الرسالة
+                        successMessage.scrollIntoView({ behavior: 'smooth' });
+                        
+                        // إعادة تعيين النموذج بعد 3 ثوانٍ
+                        setTimeout(() => {
+                            paymentForm.reset();
+                        }, 3000);
+                    } else {
+                        alert('حدث خطأ أثناء إرسال الطلب. يرجى المحاولة مرة أخرى.');
+                    }
+                })
+                .catch(error => {
+                    alert('حدث خطأ أثناء إرسال الطلب. يرجى المحاولة مرة أخرى.');
+                    console.error('Error:', error);
+                });
+            });
+            
+            // دالة لتحديث بيانات الطلب المخفية
+            function updateOrderData() {
+                const orderItemsData = document.getElementById('order-items-data');
+                const orderTotalData = document.getElementById('order-total-data');
+                
+                let orderItemsText = '';
+                cart.forEach(item => {
+                    orderItemsText += `${item.title} (${item.quantity}) - ${item.price * item.quantity} ر.س\n`;
+                });
+                
+                orderItemsData.value = orderItemsText;
+                orderTotalData.value = document.getElementById('payment-total-price').textContent;
+            }
             
             // باقي الكود كما هو...
             // إدارة المستخدمين
@@ -2589,8 +2659,6 @@
             const paymentMethods = document.querySelectorAll('.payment-method');
             const copyIbanBtn = document.getElementById('copy-iban');
             const ibanCode = document.getElementById('iban-code');
-            const paymentForm = document.getElementById('payment-form');
-            const successMessage = document.getElementById('success-message');
 
             // اختيار طريقة الدفع
             paymentMethods.forEach(method => {
@@ -2633,40 +2701,6 @@
                     copyIbanBtn.innerHTML = originalText;
                     copyIbanBtn.style.background = '';
                 }, 2000);
-            });
-            
-            // إرسال نموذج الدفع
-            paymentForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                // جمع بيانات الطلب
-                const orderData = {
-                    customer: {
-                        name: document.getElementById('name').value,
-                        email: document.getElementById('email').value,
-                        phone: document.getElementById('phone').value,
-                        notes: document.getElementById('notes').value
-                    },
-                    items: cart,
-                    total: document.getElementById('payment-total-price').textContent,
-                    date: new Date().toLocaleString('ar-SA')
-                };
-                
-                // إظهار رسالة النجاح
-                successMessage.classList.add('active');
-                
-                // تفريغ السلة بعد إتمام الطلب
-                cart = [];
-                count = 0;
-                cartCount.textContent = count;
-                
-                // تمرير إلى أعلى الصفحة لرؤية الرسالة
-                successMessage.scrollIntoView({ behavior: 'smooth' });
-                
-                // إعادة تعيين النموذج بعد 3 ثوانٍ
-                setTimeout(() => {
-                    paymentForm.reset();
-                }, 3000);
             });
         });
     </script>
